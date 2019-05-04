@@ -7,7 +7,7 @@ jeziku Go.
 Za više detalja o proizvodima, pogledati README stranice posvećene 
 njima:
 
-- [Interpretator](interpreter/README.md)
+- [Interpretator](interpreter/)
 - Kompilator
 
 ## Potrebne instalacije
