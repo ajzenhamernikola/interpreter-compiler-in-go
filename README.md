@@ -1,13 +1,13 @@
-# Monkey interpretator i kompilator
+# Monkey interpreter i kompilator
 
-Ovaj repozitorijum sadrži izvorni kod za interpretator i kompilator 
+Ovaj repozitorijum sadrži izvorni kod za interpreter i kompilator 
 za programski jezik Monkey. Oba proizvoda su napisana u programskom
 jeziku Go.
 
 Za više detalja o proizvodima, pogledati README stranice posvećene 
 njima:
 
-- [Interpretator](interpreter/)
+- [Interpreter](interpreter/)
 - Kompilator
 
 ## Potrebne instalacije
@@ -23,29 +23,39 @@ Primer izvornog koda napisanog u programskom jeziku Monkey
 koji ilustruje njegove mogućnosti:
 
 ```
-let age = 1;
-let name = "Monkey";
-let result = 10 * (20 / 2);
+// Dinamicki tipizirane promenljive, tipovi podataka:
 
+// Celi brojevi
+let age = 1; 
+// Niske
+let name = "Monkey"; 
+// Aritmeticki izrazi
+let result = 10 * (20 / 2); 
+// Nizovi
 let myArray = [1, 2, 3, 4, 5];
-
+// Recnici
 let thorsten = {"name": "Thorsten", "age": 28};
 
+// Pristupanje elementima nizova i recnika
 myArray[0] // => 1
 thorsten["name"] // => "Thorsten"
 
+// Definisanje funkcija
 let add = fn(a, b) { 
     return a + b; 
 };
 
+// Pozivanje funkcija
 add(1, 2); // => 3
 
-let add2 = fn(a, b) { 
+let add2 = fn(a, b) {
+    // Podrazumevane povratne vrednosti 
     a + b; 
 };
 
 add2(1, 2); // => 3
 
+// Rekurzivne funkcije
 let fibonacci = fn(x) {
     if (x == 0) {
         0
@@ -58,6 +68,7 @@ let fibonacci = fn(x) {
     }
 };
 
+// Funkcije viseg reda
 let twice = fn(f, x) {
     return f(f(x));
 };
