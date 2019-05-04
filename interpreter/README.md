@@ -1,6 +1,6 @@
-# Monkey interpretator
+# Monkey interpreter
 
-Ovaj direktorijum sadrži izvorni kod za implementiranje interpretatora
+Ovaj direktorijum sadrži izvorni kod za implementiranje interpretera
 za programski jezik Monkey. Izvorni kod je podeljen na pakete na
 sledeći način:
 
