@@ -7,7 +7,7 @@ import (
 	"repl"
 )
 
-func main()  {
+func main() {
 	user, err := user2.Current()
 
 	if err != nil {

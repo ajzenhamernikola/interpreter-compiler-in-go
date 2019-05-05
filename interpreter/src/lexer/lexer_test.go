@@ -5,7 +5,7 @@ import (
 	"token"
 )
 
-func TestNextToken(t *testing.T)  {
+func TestNextToken(t *testing.T) {
 	input := `
 		let five = 5;
 		let ten = 10;
@@ -28,8 +28,8 @@ func TestNextToken(t *testing.T)  {
 		125 != 125;
 	`
 
-	tests := []struct{
-		expectedType token.TokenType
+	tests := []struct {
+		expectedType    token.TokenType
 		expectedLiteral string
 	}{
 		{token.LET, "let"},
