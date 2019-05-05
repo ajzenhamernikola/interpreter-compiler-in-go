@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"lexer"
+	"os"
 	"token"
 )
 
@@ -22,6 +23,11 @@ func Start(in io.Reader, out io.Writer) {
 		}
 
 		line := scanner.Text()
+
+		if line == "exit" {
+			os.Exit(0)
+		}
+
 		l := lexer.New(line)
 
 		for tok := l.NextToken(); tok.Type != token.EOF; tok = l.NextToken() {
