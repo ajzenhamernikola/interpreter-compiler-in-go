@@ -36,8 +36,8 @@ func TestLetStatements(t *testing.T) {
 
 	checkParserErrors(t, p)
 
-	tests := []struct{
-		expectedIdentifier	string
+	tests := []struct {
+		expectedIdentifier string
 	}{
 		{"x"},
 		{"y"},
@@ -199,8 +199,8 @@ func TestIntegerLiteralExpression(t *testing.T) {
 
 func TestParsingPrefixExpressions(t *testing.T) {
 	prefixTests := []struct {
-		input string
-		operator string
+		input        string
+		operator     string
 		integerValue int64
 	}{
 		{"!5;", "!", 5},
@@ -266,9 +266,9 @@ func testIntegerLiteral(t *testing.T, il ast.Expression, value int64) bool {
 
 func TestParsingInfixOperators(t *testing.T) {
 	infixTests := []struct {
-		input string
-		leftValue int64
-		operator string
+		input      string
+		leftValue  int64
+		operator   string
 		rightValue int64
 	}{
 		{"5 + 5;", 5, "+", 5},

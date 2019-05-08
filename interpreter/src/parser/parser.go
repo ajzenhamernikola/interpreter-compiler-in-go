@@ -11,46 +11,46 @@ import (
 const (
 	_ int = iota
 	LOWEST
-	EQUALS	// ==
-	LESSGREATER	// < or >
-	SUM	// +
-	PRODUCT	// *
-	PREFIX	// -X or !X
-	CALL	// myFunction(X)
+	EQUALS      // ==
+	LESSGREATER // < or >
+	SUM         // +
+	PRODUCT     // *
+	PREFIX      // -X or !X
+	CALL        // myFunction(X)
 )
 
-var precedences = map[token.TokenType]int {
-	token.EQ: EQUALS,
-	token.NOT_EQ: EQUALS,
-	token.LT: LESSGREATER,
-	token.GT: LESSGREATER,
-	token.PLUS: SUM,
-	token.MINUS: SUM,
+var precedences = map[token.TokenType]int{
+	token.EQ:       EQUALS,
+	token.NOT_EQ:   EQUALS,
+	token.LT:       LESSGREATER,
+	token.GT:       LESSGREATER,
+	token.PLUS:     SUM,
+	token.MINUS:    SUM,
 	token.ASTERISK: PRODUCT,
-	token.SLASH: PRODUCT,
-	token.LPAREN: CALL,
+	token.SLASH:    PRODUCT,
+	token.LPAREN:   CALL,
 }
 
 type (
 	prefixParseFn func() ast.Expression
-	infixParseFn func(expression ast.Expression) ast.Expression
+	infixParseFn  func(expression ast.Expression) ast.Expression
 )
 
 type Parser struct {
 	l *lexer.Lexer
 
-	currToken	token.Token
-	peekToken	token.Token
+	currToken token.Token
+	peekToken token.Token
 
-	errors		[]string
+	errors []string
 
 	prefixParseFns map[token.TokenType]prefixParseFn
-	infixParseFns map[token.TokenType]infixParseFn
+	infixParseFns  map[token.TokenType]infixParseFn
 }
 
 func New(l *lexer.Lexer) *Parser {
 	p := &Parser{
-		l: l,
+		l:      l,
 		errors: []string{},
 	}
 
@@ -236,12 +236,12 @@ func (p *Parser) parseIntegerLiteral() ast.Expression {
 func (p *Parser) noPrefixParseFnError(t token.TokenType) {
 	msg := fmt.Sprintf("no prefix parse function for %s found",
 		t)
-	p.errors = append(p.errors,msg)
+	p.errors = append(p.errors, msg)
 }
 
 func (p *Parser) parsePrefixExpression() ast.Expression {
 	expression := &ast.PrefixExpression{
-		Token: p.currToken,
+		Token:    p.currToken,
 		Operator: p.currToken.Literal,
 	}
 
@@ -270,9 +270,9 @@ func (p *Parser) currPrecedence() int {
 
 func (p *Parser) parseInfixExpression(left ast.Expression) ast.Expression {
 	expression := &ast.InfixExpression{
-		Token: p.currToken,
+		Token:    p.currToken,
 		Operator: p.currToken.Literal,
-		Left: left,
+		Left:     left,
 	}
 
 	precedence := p.currPrecedence()
