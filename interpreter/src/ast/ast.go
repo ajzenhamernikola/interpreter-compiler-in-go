@@ -6,8 +6,8 @@ import (
 )
 
 type Node interface {
-	TokenLiteral()	string
-	String()	string
+	TokenLiteral() string
+	String() string
 }
 
 type Statement interface {
@@ -21,7 +21,7 @@ type Expression interface {
 }
 
 type Program struct {
-	Statements	[]Statement
+	Statements []Statement
 }
 
 func (p *Program) TokenLiteral() string {
@@ -43,9 +43,9 @@ func (p *Program) String() string {
 }
 
 type LetStatement struct {
-	Token	token.Token	// token.LET
-	Name	*Identifier
-	Value	Expression
+	Token token.Token // token.LET
+	Name  *Identifier
+	Value Expression
 }
 
 func (ls *LetStatement) statementNode() {}
@@ -71,8 +71,8 @@ func (ls *LetStatement) String() string {
 }
 
 type Identifier struct {
-	Token	token.Token	// token.IDENT
-	Value	string
+	Token token.Token // token.IDENT
+	Value string
 }
 
 func (i *Identifier) expressionNode() {}
@@ -86,7 +86,7 @@ func (i *Identifier) String() string {
 }
 
 type ReturnStatement struct {
-	Token token.Token	// token.RETURN
+	Token       token.Token // token.RETURN
 	ReturnValue Expression
 }
 
@@ -111,7 +111,7 @@ func (rs *ReturnStatement) String() string {
 }
 
 type ExpressionStatement struct {
-	Token token.Token	// the first token of the expression
+	Token      token.Token // the first token of the expression
 	Expression Expression
 }
 
@@ -144,9 +144,9 @@ func (il *IntegerLiteral) String() string {
 }
 
 type PrefixExpression struct {
-	Token token.Token // The prefix token, e.g. !
+	Token    token.Token // The prefix token, e.g. !
 	Operator string
-	Right Expression
+	Right    Expression
 }
 
 func (pe *PrefixExpression) expressionNode() {}
@@ -161,6 +161,31 @@ func (pe *PrefixExpression) String() string {
 	out.WriteString("(")
 	out.WriteString(pe.Operator)
 	out.WriteString(pe.Right.String())
+	out.WriteString(")")
+
+	return out.String()
+}
+
+type InfixExpression struct {
+	Token    token.Token // The infix token, e.g. +
+	Operator string
+	Left     Expression
+	Right    Expression
+}
+
+func (ie *InfixExpression) expressionNode() {}
+
+func (ie *InfixExpression) TokenLiteral() string {
+	return ie.Token.Literal
+}
+
+func (ie *InfixExpression) String() string {
+	var out bytes.Buffer
+
+	out.WriteString("(")
+	out.WriteString(ie.Left.String())
+	out.WriteString(" " + ie.Operator + " ")
+	out.WriteString(ie.Right.String())
 	out.WriteString(")")
 
 	return out.String()
